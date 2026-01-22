@@ -1,20 +1,33 @@
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-links a");
+// Projects accordion - allow only ONE open at a time
+const projectTitles = document.querySelectorAll(".project-title");
 
-window.addEventListener("scroll", () => {
-    let current = "";
+projectTitles.forEach(title => {
+    title.addEventListener("click", (e) => {
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (scrollY >= sectionTop) {
-            current = section.getAttribute("id");
-        }
-    });
+        // If GitHub link is clicked, do nothing
+        if (e.target.closest(".project-link")) return;
 
-    navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${current}`) {
-            link.classList.add("active");
+        const currentContent = title.nextElementSibling;
+        const currentIcon = title.querySelector(".toggle-icon");
+
+        // Close all other open projects
+        projectTitles.forEach(otherTitle => {
+            const otherContent = otherTitle.nextElementSibling;
+            const otherIcon = otherTitle.querySelector(".toggle-icon");
+
+            if (otherContent !== currentContent) {
+                otherContent.style.display = "none";
+                otherIcon.textContent = "+";
+            }
+        });
+
+        // Toggle current project
+        if (currentContent.style.display === "block") {
+            currentContent.style.display = "none";
+            currentIcon.textContent = "+";
+        } else {
+            currentContent.style.display = "block";
+            currentIcon.textContent = "−";
         }
     });
 });
