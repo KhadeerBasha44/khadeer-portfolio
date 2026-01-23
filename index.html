@@ -6,7 +6,7 @@
     <title>Khadeer Basha | Data Analyst</title>
 
     <!-- Your CSS -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Font Awesome (for GitHub, LinkedIn icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -17,6 +17,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <span class="logo">Welcome to Khadeer's folio</span>
+
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -28,7 +31,7 @@
     </nav>
 
     <div class="container">
-
+        
     <!-- HERO SECTION -->
     <!-- HERO SECTION -->
 <section id="home" class="hero-section">
@@ -52,9 +55,7 @@
                 with hands-on project experience.
             </p>
 
-            <a class="resume-btn" 
-                href="assets/Khadeer_Basha_Resume.pdf" 
-                download>
+            <a class="resume-btn" href="assets/Khadeer_Basha_Resume.pdf" target="_blank">
                 Download Resume
             </a>
         </div>
@@ -131,7 +132,7 @@
                 <span>80%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 80%;"></div>
+                <div class="skill-progress" data-width="80%"></div>
             </div>
         </div>
 
@@ -141,7 +142,7 @@
                 <span>75%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 75%;"></div>
+                <div class="skill-progress"  data-width="75%"></div>
             </div>
         </div>
 
@@ -151,7 +152,7 @@
                 <span>75%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 75%;"></div>
+                <div class="skill-progress" data-width="75%"></div>
             </div>
         </div>
 
@@ -161,7 +162,7 @@
                 <span>80%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 80%;"></div>
+                <div class="skill-progress" data-width="80%"></div>
             </div>
         </div>
 
@@ -172,7 +173,7 @@
                 <span>70%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 70%;"></div>
+                <div class="skill-progress" data-width="70%"></div>
             </div>
         </div>
 
@@ -182,7 +183,7 @@
                 <span>75%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 75%;"></div>
+                <div class="skill-progress" data-width="75%"></div>
             </div>
         </div>
 
@@ -192,7 +193,7 @@
                 <span>70%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 70%;"></div>
+                <div class="skill-progress" data-width="70%"></div>
             </div>
         </div>
 
@@ -202,7 +203,7 @@
                 <span>70%</span>
             </div>
             <div class="skill-bar">
-                <div class="skill-progress" style="width: 70%;"></div>
+                <div class="skill-progress" data-width="70%"></div>
             </div>
         </div>
 
@@ -237,11 +238,14 @@
 </button>
 
             <div class="project-content">
+                <div class="project-overview">
                 <p><strong>Overview:</strong><br>
                     Built a machine learning–based system to predict the likelihood of
                     Diabetes, Heart Disease, and Parkinson’s Disease using patient medical data.
                 </p>
+                </div>
 
+                <div class="project-details">
                 <p><strong>What I did:</strong></p>
                 <ul>
                     <li>Performed data preprocessing and feature selection</li>
@@ -278,11 +282,14 @@
 </button>
 
             <div class="project-content">
+                <div class="project-overview">
                 <p><strong>Overview:</strong><br>
                     Developed predictive models to estimate health insurance costs
                     based on demographic and lifestyle factors.
                 </p>
+                </div>
 
+                <div class="project-details">
                 <p><strong>What I did:</strong></p>
                 <ul>
                     <li>Performed exploratory data analysis (EDA)</li>
@@ -319,11 +326,14 @@
 </button>
 
             <div class="project-content">
+                <div class="project-overview">
                 <p><strong>Overview:</strong><br>
                     Analyzed Indian domestic airline data to identify trends,
                     seasonality, and factors affecting flight demand.
                 </p>
+                </div>
 
+                <div class="project-details">
                 <p><strong>What I did:</strong></p>
                 <ul>
                     <li>Cleaned and analyzed historical airline data</li>
@@ -409,18 +419,30 @@
 
             <form action="mailto:khadeershaik2906@gmail.com" method="post" enctype="text/plain">
 
-                <div class="form-row">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label>
+                Your Name <span class="required">*</span>
+            </label>
+            <input type="text" name="name" required>
+        </div>
 
-                <input type="text" name="subject" placeholder="Subject" required>
+        <div class="form-group">
+            <label>
+                Your Email <span class="required">*</span>
+            </label>
+            <input type="email" name="email" required>
+        </div>
+    </div>
 
-                <textarea name="message" rows="6" placeholder="Message" required></textarea>
+    <input type="text" name="subject" placeholder="Subject" required>
 
-                <button type="submit" class="send-btn">Send Message</button>
+    <textarea name="message" rows="6" placeholder="Message" required></textarea>
 
-            </form>
+    <button type="submit" class="send-btn">Send Message</button>
+
+</form>
+
 
         </div>
 
@@ -430,13 +452,8 @@
 
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js"></script>
 
 </body>
 
 </html>
-
-
-
-
-
