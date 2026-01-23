@@ -3,15 +3,26 @@ html {
 }
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(
-        135deg,
-        #ebedf1,
-        #edf0f4
-    );
+    background-color: #b2dcee;
+
+    /* Subtle data grid */
+    background-image:
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+        radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+
+    background-size:
+        40px 40px,
+        40px 40px,
+        120px 120px;
+
+    background-position:
+        center center;
+
     color: #030303;
 }
+
 
 .container {
     max-width: 900px;
@@ -168,8 +179,8 @@ a:hover {
 
 .edu-dot {
     position: absolute;
-    left: -8px;
-    top: 0px;
+    left: -10px;
+    top: 5px;
     width: 14px;
     height: 14px;
     background-color: #ffffff;
@@ -232,11 +243,13 @@ a:hover {
 }
 
 .skill-progress {
+    width: 0;
     height: 100%;
     background-color: #0066cc;
     border-radius: 5px;
-    animation: fillBar 1.5s ease-in-out;
+    transition: width 1.2s ease;
 }
+
 
 /* Animation */
 @keyframes fillBar {
@@ -251,6 +264,7 @@ a:hover {
         grid-template-columns: 1fr;
     }
 }
+
 /* ===== PROJECTS SECTION ===== */
 
 .projects-subtitle {
@@ -279,28 +293,9 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #222;
 }
 
-
-.project-content {
-    display: none;
-    padding-bottom: 20px;
-    font-size: 16px;
-    color: #333;
-}
-
-.project-content ul {
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-.project-content li {
-    margin-bottom: 6px;
-}
-
-/* Project GitHub link icon */
-
+/* Title + GitHub icon */
 .project-name {
     display: flex;
     align-items: center;
@@ -309,52 +304,52 @@ a:hover {
 
 .project-link {
     font-size: 16px;
-    text-decoration: none;
     color: #0066cc;
 }
 
 .project-link:hover {
     color: #004999;
+    transform: scale(1.15);
 }
 
-/* Prevent link click from toggling accordion */
-.project-link {
-    pointer-events: auto;
-}
-
-/* Project title layout fix */
-
-.project-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.project-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    color: #222;
-}
-
-/* Toggle + / − icon ONLY */
+/* Toggle icon */
 .toggle-icon {
     font-size: 22px;
     color: #0066cc;
-    flex-shrink: 0;
+    transition: transform 0.3s ease;
 }
 
-/* GitHub link icon */
-.project-link {
-    font-size: 16px;
-    color: #0066cc;
-    text-decoration: none;
+/* ---------- ACCORDION CONTENT ---------- */
+
+/* Overview always visible */
+.project-overview {
+    margin-bottom: 12px;
 }
 
-.project-link:hover {
-    color: #004999;
+/* Details hidden by default */
+.project-details {
+    display: none;
+    animation: slideDown 0.35s ease;
 }
+
+/* Show details when active */
+.project-details.active {
+    display: block;
+}
+
+/* Smooth animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* ===== HERO SECTION WITH PROFILE ===== */
 
 .hero-section {
@@ -373,10 +368,22 @@ a:hover {
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(10, 10, 10, 0.5);
 }
+
 .hero-content {
-    padding-top: 0;
-    margin-top: 0;
+    animation: fadeUp 0.8s ease-out forwards;
 }
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 .hero-content h1 {
     margin-top: 0;
@@ -396,13 +403,20 @@ a:hover {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+
     .hero-container {
         flex-direction: column;
+        align-items: center;   /* ⭐ THIS centers image */
         text-align: center;
     }
 
+    .hero-image {
+        margin-bottom: 20px;
+    }
+
     .hero-image img {
-        width: 370px;
+        display: block;
+        margin: 0 auto;        /* ⭐ force center */
     }
 }
 
@@ -436,12 +450,14 @@ a:hover {
     text-decoration: none;
     font-weight: bold;
 }
+
 .contact-socials i {
     font-size: 16px;
 }
 
 .contact-socials a:hover {
-    background: #0066cc;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
 /* Layout */
@@ -516,4 +532,64 @@ a:hover {
     }
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* ---------- MOBILE NAVBAR (HAMBURGER) ---------- */
+
+.hamburger {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Mobile navbar behavior */
+@media (max-width: 768px) {
+
+    .logo {
+        display: block;
+        width: 100%;
+        text-align: center;   /* 👈 CENTER TEXT */
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+
+    .hamburger {
+        display: block;
+        align-self: flex-end;
+    }
+
+    .nav-links {
+        display: none;               /* hide menu initially */
+        flex-direction: column;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 10px 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .nav-links.active {
+        display: flex;               /* show on click */
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 12px 0;
+    }
+}
