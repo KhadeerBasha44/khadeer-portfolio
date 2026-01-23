@@ -402,7 +402,7 @@ a:hover {
     }
 
     .hero-image img {
-        width: 180px;
+        width: 370px;
     }
 }
 
@@ -515,4 +515,5 @@ a:hover {
         flex-direction: column;
     }
 }
+
 
