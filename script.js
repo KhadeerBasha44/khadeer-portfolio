@@ -1,33 +1,60 @@
-// Projects accordion - allow only ONE open at a time
 const projectTitles = document.querySelectorAll(".project-title");
 
 projectTitles.forEach(title => {
     title.addEventListener("click", (e) => {
 
-        // If GitHub link is clicked, do nothing
+        // Ignore GitHub link clicks
         if (e.target.closest(".project-link")) return;
 
-        const currentContent = title.nextElementSibling;
-        const currentIcon = title.querySelector(".toggle-icon");
+        const details = title.nextElementSibling.querySelector(".project-details");
+        const icon = title.querySelector(".toggle-icon");
 
-        // Close all other open projects
-        projectTitles.forEach(otherTitle => {
-            const otherContent = otherTitle.nextElementSibling;
-            const otherIcon = otherTitle.querySelector(".toggle-icon");
+        // Close others
+        projectTitles.forEach(other => {
+            const otherDetails = other.nextElementSibling.querySelector(".project-details");
+            const otherIcon = other.querySelector(".toggle-icon");
 
-            if (otherContent !== currentContent) {
-                otherContent.style.display = "none";
+            if (otherDetails !== details) {
+                otherDetails.classList.remove("active");
                 otherIcon.textContent = "+";
             }
         });
 
-        // Toggle current project
-        if (currentContent.style.display === "block") {
-            currentContent.style.display = "none";
-            currentIcon.textContent = "+";
+        // Toggle current
+        if (details.classList.contains("active")) {
+            details.classList.remove("active");
+            icon.textContent = "+";
         } else {
-            currentContent.style.display = "block";
-            currentIcon.textContent = "−";
+            details.classList.add("active");
+            icon.textContent = "−";
         }
     });
 });
+
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+
+/* CLOSE menu after clicking a link (mobile) */
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.querySelector(".nav-links").classList.remove("active");
+    });
+});
+
+
+const skillBars = document.querySelectorAll(".skill-progress");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bar = entry.target;
+            bar.style.width = bar.getAttribute("data-width");
+        }
+    });
+}, { threshold: 0.6 });
+
+skillBars.forEach(bar => {
+    observer.observe(bar);
+});
+
