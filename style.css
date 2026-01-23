@@ -85,6 +85,38 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.resume-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+/* Icon wiggle on hover */
+.resume-btn:hover .resume-icon {
+    transform: rotate(-8deg) scale(1.1);
+}
+
+.resume-hint {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #333;
+    opacity: 0.85;
+}
+
+/* Hide hint on desktop */
+@media (min-width: 769px) {
+    .resume-hint {
+        display: none;
+    }
+}
+
+
 .resume-btn:hover {
     background-color: #7c756b;
 }
