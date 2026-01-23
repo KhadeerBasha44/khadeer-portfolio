@@ -58,3 +58,19 @@ skillBars.forEach(bar => {
     observer.observe(bar);
 });
 
+const resumeBtn = document.getElementById("resumeBtn");
+
+if (resumeBtn) {
+    resumeBtn.addEventListener("click", () => {
+        const text = resumeBtn.querySelector(".resume-text");
+        const icon = resumeBtn.querySelector(".resume-icon");
+
+        text.textContent = "Downloading...";
+        icon.textContent = "⬇️";
+
+        setTimeout(() => {
+            text.textContent = "Download Resume";
+            icon.textContent = "📄";
+        }, 2500);
+    });
+}
