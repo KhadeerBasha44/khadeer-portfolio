@@ -1206,6 +1206,10 @@ a:hover {
     display: none;
 }
 
+.resume-hint {
+    display: none !important;
+}
+
 
 
 
