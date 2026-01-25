@@ -23,6 +23,11 @@ body {
     background-attachment: fixed; 
 
     color: #030303;
+
+    transition: 
+    background-color 0.35s ease,
+    color 0.35s ease;
+
 }
 
 
@@ -135,7 +140,6 @@ a:hover {
     left: 0;
     width: 250px;
     height: 100vh;
-    background: #ffffff;
     border-right: 1px solid #000000;
     padding: 20px 15px;
     z-index: 1000;
@@ -245,6 +249,10 @@ a:hover {
     border: 3px solid #0066cc;
     border-radius: 50%;
     cursor: grab;
+
+    /* 🔥 SMOOTH MOBILE DRAG */
+    touch-action: none;
+    will-change: transform;
 }
 
 .edu-dot {
@@ -763,18 +771,6 @@ a:hover {
     }
 }
 
-/* ===== SCROLL REVEAL (CONTACT) ===== */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: all 0.8s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 /* Delays */
 .delay-1 { transition-delay: 0.15s; }
@@ -1241,3 +1237,415 @@ a:hover {
         box-shadow: 0 18px 40px rgba(0,0,0,0.65);
     }
 }
+
+/* ===== TYPER TEXT STYLE ===== */
+.typer {
+    font-size: 22px;
+    font-weight: 600;
+    color: #444;
+    min-height: 28px;
+    display: inline-block;
+    border-right: 2px solid #444;
+    padding-right: 6px;
+    animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #444; }
+}
+
+/* ===== FLOATING HERO IMAGE ===== */
+@media (min-width: 769px) {
+    .hero-image img {
+        animation: floatImage 4s ease-in-out infinite;
+    }
+}
+
+@keyframes floatImage {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* ===== PROJECT STAGGER ANIMATION ===== */
+.reveal-project {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-project.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, #ff0000, #11ff00);
+    z-index: 10000;
+    transition: width 0.15s ease-out;
+}
+/* ===== SECTION TITLE ANIMATION ===== */
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0066cc, #ff0000);
+    transition: width 0.8s ease;
+}
+
+.section-title.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title.active::after {
+    width: 100%;
+}
+/* ===== DARK MODE ===== */
+body.dark {
+    background-color: #0e1117;
+    color: #e6e6e6;
+}
+
+body.dark .sidebar {
+    background: #161b22;
+}
+
+body.dark a {
+    color: #58a6ff;
+}
+
+/* ===== SUBTLE BACKGROUND MOTION ===== */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(0,102,204,0.08), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255,0,0,0.06), transparent 40%);
+    z-index: -1;
+    animation: bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+}
+/* ===== DARK MODE SIDEBAR FIX ===== */
+body.dark .sidebar {
+    background: #161b22 !important;
+}
+/* ===== FORCE DARK MODE BUTTON VISIBILITY ===== */
+
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+/* Sidebar spacing fix */
+.sidebar-profile {
+    padding-bottom: 15px;
+}
+/* Smooth theme transition for all sections */
+section,
+.sidebar,
+.project-card,
+.contact-info,
+.contact-form {
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* =====================================================
+   🌙 DARK MODE — TEXT & ICON VISIBILITY FIX
+   ===================================================== */
+
+body.dark {
+    color: #e6e6e6;
+}
+
+/* Headings */
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4 {
+    color: #ffffff;
+}
+
+/* Paragraphs & general text */
+body.dark p,
+body.dark li,
+body.dark span {
+    color: #d1d5db;
+}
+
+
+/* Sidebar text */
+body.dark .sidebar,
+body.dark .sidebar a,
+body.dark .profile-name,
+body.dark .logo {
+    color: #e6e6e6;
+}
+
+/* Sidebar active / hover */
+body.dark .nav-links a.active,
+body.dark .nav-links a:hover {
+    color: #58a6ff;
+}
+
+/* Social icons (sidebar + contact) */
+body.dark .profile-socials a,
+body.dark .contact-socials a {
+    background: #21262d;
+    color: #ffffff;
+}
+
+body.dark .profile-socials a:hover,
+body.dark .contact-socials a:hover {
+    background: #30363d;
+}
+
+/* Skill labels */
+body.dark .skill-header span {
+    color: #e6e6e6;
+}
+
+/* Skill bar background */
+body.dark .skill-bar {
+    background: #2d333b;
+}
+
+/* Education timeline text */
+body.dark .edu-content p,
+body.dark .edu-content h4,
+body.dark .edu-college {
+    color: #e6e6e6;
+}
+
+/* Contact labels */
+body.dark .info-item strong {
+    color: #ffffff;
+}
+
+body.dark .info-item p {
+    color: #d1d5db;
+}
+
+/* Form fields */
+body.dark input,
+body.dark textarea {
+    background: #0d1117;
+    color: #ffffff;
+    border: 1px solid #30363d;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Buttons */
+body.dark .send-btn {
+    background: #238636;
+    color: #ffffff;
+}
+
+body.dark .send-btn:hover {
+    background: #2ea043;
+}
+
+/* Project expand icon */
+body.dark .toggle-icon {
+    color: #58a6ff;
+}
+
+/* =====================================================
+   🌙 DARK MODE — REMOVE BOXED CARD LOOK
+   ===================================================== */
+
+/* Flatten sections in dark mode */
+body.dark section,
+body.dark .education-item,
+body.dark .contact-info,
+body.dark .contact-form {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Keep project cards slightly distinct (optional, subtle) */
+body.dark .project-card {
+    background: rgba(255, 255, 255, 0.02) !important;
+    box-shadow: none !important;
+}
+
+/* Remove inner padding illusion */
+body.dark section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* =====================================================
+   🖥 DESKTOP — DARK MODE BUTTON TOP RIGHT
+   ===================================================== */
+@media (min-width: 769px) {
+    #themeToggle {
+        position: fixed;
+        top: 18px;
+        right: 24px;
+        z-index: 10001;
+
+        margin: 0;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
+    /* Remove it from sidebar flow visually */
+    .sidebar-profile #themeToggle {
+        margin: 0;
+    }
+}
+
+/* =====================================================
+   📱 MOBILE — DARK MODE BESIDE MENU TOGGLE
+   ===================================================== */
+@media (max-width: 768px) {
+    #themeToggle {
+        position: fixed;
+        top: 14px;
+        right: 78px; /* sits beside hamburger */
+        z-index: 10001;
+
+        padding: 6px 14px;
+        font-size: 13px;
+        border-radius: 18px;
+    }
+}
+
+/* Button hover feedback */
+#themeToggle:hover {
+    transform: scale(1.05);
+}
+/* =====================================================
+   📱 MOBILE — DARK MODE BESIDE HAMBURGER
+   ===================================================== */
+@media (max-width: 768px) {
+    #themeToggle {
+        position: fixed;
+        top: 2px;
+        right: 80px; /* beside hamburger */
+        z-index: 6001;
+
+        width: 36px;
+        height: 36px;
+        padding: 0;
+
+        border-radius: 40%;
+        font-size: 18px;
+        background: #000;
+        color: #fff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+/* =====================================================
+   🖥 DESKTOP — TOP RIGHT WITH LABEL
+   ===================================================== */
+@media (min-width: 769px) {
+    #themeToggle {
+        position: fixed;
+        top: 18px;
+        right: 24px;
+        z-index: 10001;
+
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+}
+/* =====================================================
+   📱 MOBILE — ICON ONLY DARK MODE (NO BACKGROUND)
+   ===================================================== */
+@media (max-width: 768px) {
+    #themeToggle {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+
+        width: auto;
+        height: auto;
+        padding: 0;
+
+        font-size: 20px;
+        color: #000; /* light mode default */
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body.dark #themeToggle {
+        color: #ffffff; /* visible in dark mode */
+    }
+
+    /* Tap feedback */
+    #themeToggle:active {
+        transform: scale(0.9);
+    }
+}
+/* =====================================================
+   🌙☀️ THEME TOGGLE ICON ANIMATION
+   ===================================================== */
+#themeToggle {
+    transition:
+        transform 0.3s ease,
+        opacity 0.25s ease,
+        color 0.3s ease;
+}
+
+/* Animation states */
+#themeToggle.switching {
+    opacity: 0;
+    transform: rotate(-360deg) scale(0.8);
+}
+
+/* ===== FORCE DARK MODE BUTTON VISIBILITY ===== */
+.theme-toggle {
+    display: block !important;
+    margin: 15px auto 18px auto;
+    padding: 10px 18px;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: fit-content;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
