@@ -65,18 +65,6 @@ if (resumeBtn) {
     });
 }
 
-// Scroll reveal animation
-const reveals = document.querySelectorAll(".reveal");
-
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-        }
-    });
-}, { threshold: 0.2 });
-
-reveals.forEach(el => revealObserver.observe(el));
 
 // Global scroll reveal for sections
 const revealElements = document.querySelectorAll(".reveal");
@@ -118,54 +106,75 @@ document.querySelectorAll(".sidebar .nav-links a").forEach(link => {
     });
 });
 
+// ===== SMOOTH EDUCATION DOT DRAG (MOBILE + DESKTOP) =====
 const dot = document.querySelector(".edu-dot");
 const eduItem = document.querySelector(".education-item");
 
 let isDragging = false;
 let startY = 0;
-let startTop = 0;
+let currentY = 0;
+let lastY = 0;
+let rafId = null;
 
-dot.addEventListener("mousedown", startDrag);
-dot.addEventListener("touchstart", startDrag);
+if (dot && eduItem) {
 
-function startDrag(e) {
-    isDragging = true;
-    dot.style.cursor = "grabbing";
+    const onStart = (e) => {
+        isDragging = true;
+        dot.style.cursor = "grabbing";
 
-    startY = e.touches ? e.touches[0].clientY : e.clientY;
-    startTop = dot.offsetTop;
+        startY = e.touches ? e.touches[0].clientY : e.clientY;
+        lastY = dot.getBoundingClientRect().top;
 
-    document.addEventListener("mousemove", dragDot);
-    document.addEventListener("touchmove", dragDot);
-    document.addEventListener("mouseup", stopDrag);
-    document.addEventListener("touchend", stopDrag);
+        document.addEventListener("mousemove", onMove);
+        document.addEventListener("touchmove", onMove, { passive: false });
+        document.addEventListener("mouseup", onEnd);
+        document.addEventListener("touchend", onEnd);
+    };
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        currentY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        if (!rafId) {
+            rafId = requestAnimationFrame(updatePosition);
+        }
+    };
+
+    const updatePosition = () => {
+        const delta = currentY - startY;
+        let newY = lastY + delta;
+
+        const parentRect = eduItem.getBoundingClientRect();
+        const dotRect = dot.getBoundingClientRect();
+
+        const minY = parentRect.top;
+        const maxY = parentRect.bottom - dotRect.height;
+
+        newY = Math.max(minY, Math.min(maxY, newY));
+
+        dot.style.transform = `translateY(${newY - parentRect.top}px)`;
+
+        rafId = null;
+    };
+
+    const onEnd = () => {
+        isDragging = false;
+        dot.style.cursor = "grab";
+        cancelAnimationFrame(rafId);
+        rafId = null;
+
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("touchmove", onMove);
+        document.removeEventListener("mouseup", onEnd);
+        document.removeEventListener("touchend", onEnd);
+    };
+
+    dot.addEventListener("mousedown", onStart);
+    dot.addEventListener("touchstart", onStart, { passive: false });
 }
 
-function dragDot(e) {
-    if (!isDragging) return;
-
-    const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-    const deltaY = currentY - startY;
-
-    let newTop = startTop + deltaY;
-
-    // limits (stay inside education item)
-    const minTop = 0;
-    const maxTop = eduItem.offsetHeight - dot.offsetHeight;
-
-    newTop = Math.max(minTop, Math.min(maxTop, newTop));
-    dot.style.top = newTop + "px";
-}
-
-function stopDrag() {
-    isDragging = false;
-    dot.style.cursor = "grab";
-
-    document.removeEventListener("mousemove", dragDot);
-    document.removeEventListener("touchmove", dragDot);
-    document.removeEventListener("mouseup", stopDrag);
-    document.removeEventListener("touchend", stopDrag);
-}
 
 // ===== SCROLLSPY FOR SIDEBAR (DESKTOP + MOBILE) =====
 const sections = document.querySelectorAll("section[id]");
@@ -191,5 +200,135 @@ function activateNavLink() {
 }
 
 window.addEventListener("scroll", activateNavLink);
+
+// ===== TYPING TEXT EFFECT =====
+const typer = document.querySelector(".typer");
+
+if (typer) {
+    const words = typer.getAttribute("data-words").split(", ");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+        const currentWord = words[wordIndex];
+        if (!isDeleting) {
+            typer.textContent = currentWord.slice(0, charIndex++);
+            if (charIndex > currentWord.length) {
+                setTimeout(() => isDeleting = true, 1200);
+            }
+        } else {
+            typer.textContent = currentWord.slice(0, charIndex--);
+            if (charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
+        }
+        setTimeout(typeEffect, isDeleting ? 60 : 90);
+    }
+
+    typeEffect();
+}
+
+// ===== PROJECT STAGGER REVEAL =====
+const projectCards = document.querySelectorAll(".reveal-project");
+
+const projectObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add("active");
+                }, index * 150);
+            }
+        });
+    },
+    { threshold: 0.2 }
+);
+
+projectCards.forEach(card => projectObserver.observe(card));
+
+// ===== SCROLL PROGRESS BAR =====
+const progressBar = document.getElementById("scroll-progress");
+
+window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + "%";
+});
+
+// ===== SECTION TITLE REVEAL =====
+const sectionTitles = document.querySelectorAll(".section-title");
+
+const titleObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    },
+    { threshold: 0.4 }
+);
+
+sectionTitles.forEach(title => titleObserver.observe(title));
+
+// ===== DARK MODE (PERSISTENT + SYSTEM AWARE) =====
+const toggleBtn = document.getElementById("themeToggle");
+
+// Apply saved or system preference on load
+(function applyInitialTheme() {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+        document.body.classList.toggle("dark", savedTheme === "dark");
+    } else {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.body.classList.toggle("dark", prefersDark);
+    }
+
+    updateToggleText();
+})();
+
+function updateToggleText(animated = false) {
+    if (!toggleBtn) return;
+
+    const isDark = document.body.classList.contains("dark");
+
+    if (animated) {
+        toggleBtn.classList.add("switching");
+
+        setTimeout(() => {
+            if (window.innerWidth <= 768) {
+                toggleBtn.textContent = isDark ? "☀️" : "🌙";
+            } else {
+                toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+            }
+
+            toggleBtn.classList.remove("switching");
+        }, 180);
+    } else {
+        if (window.innerWidth <= 768) {
+            toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        } else {
+            toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        }
+    }
+}
+
+
+// Toggle on click
+if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+
+        const theme = document.body.classList.contains("dark") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+
+        updateToggleText(true);
+    });
+}
+
 
 
