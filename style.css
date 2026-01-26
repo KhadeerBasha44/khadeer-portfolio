@@ -1019,7 +1019,7 @@ a:hover {
         text-align: center;
         margin-bottom: 12px;
         padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.25);
+        border-bottom: 1px solid rgba(0,0,0);
     }
 
     .profile-img img {
@@ -1648,4 +1648,5 @@ body.dark section {
 .theme-toggle:hover {
     transform: scale(1.05);
 }
+
 
