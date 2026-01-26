@@ -888,7 +888,7 @@ a:hover {
     }
 }
 
-/* ===== DESKTOP: CENTER KHAD EER'S FOLIO ===== */
+/* ===== DESKTOP: CENTER KHADEER'S FOLIO ===== */
 @media (min-width: 769px) {
 
     .sidebar-header {
@@ -1019,7 +1019,7 @@ a:hover {
         text-align: center;
         margin-bottom: 12px;
         padding-bottom: 10px;
-        border-bottom: 1px solid rgba(0,0,0);
+        border-bottom: 1px solid rgb(0, 0, 0);
     }
 
     .profile-img img {
@@ -1550,7 +1550,7 @@ body.dark section {
 @media (max-width: 768px) {
     #themeToggle {
         position: fixed;
-        top: 2px;
+        top: 3px;
         right: 80px; /* beside hamburger */
         z-index: 6001;
 
@@ -1649,4 +1649,13 @@ body.dark section {
     transform: scale(1.05);
 }
 
+/* =====================================================
+   📱 MOBILE — ALWAYS APPLY PROFILE HOVER EFFECT
+   ===================================================== */
+@media (max-width: 768px) {
+    .profile-img img {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.548);
+    }
+}
 
