@@ -111,7 +111,11 @@
             <a class="resume-btn"
    href="assets/Khadeer_Basha_Resume.pdf"
    download
-   id="resumeBtn">
+   id="resumeBtn"
+   onclick="gtag('event', 'resume_download', {
+     event_category: 'Resume',
+     event_label: 'Hero Section Resume'
+   });">
    <span class="resume-icon">📄</span>
    <span class="resume-text">Download Resume</span>
 </a>
@@ -498,4 +502,5 @@
 </body>
 
 </html>
+
 
