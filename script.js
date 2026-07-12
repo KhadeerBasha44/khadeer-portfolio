@@ -480,6 +480,7 @@ if (contactForm) {
         window.addEventListener("scroll", () => {
             toTop.classList.toggle("visible", window.scrollY > 500);
         });
+
         toTop.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
@@ -753,4 +754,35 @@ if (contactForm) {
             scrollHint.classList.toggle("hidden", window.scrollY > 150);
         });
     }
+})();
+
+// =====================================================
+// ✨ PREMIUM FX ROUND 4 — staggered content reveals
+// =====================================================
+(function () {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    // About paragraphs and the education entry slide in one after another
+    const items = [
+        ...document.querySelectorAll("#about p"),
+        ...document.querySelectorAll(".education-item")
+    ];
+
+    if (!items.length) return;
+
+    items.forEach((el, i) => {
+        el.classList.add("reveal");
+        el.style.transitionDelay = (i % 3) * 0.12 + "s";
+    });
+
+    const staggerObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("active");
+            staggerObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.15 });
+
+    items.forEach(el => staggerObserver.observe(el));
 })();
