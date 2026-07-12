@@ -2155,3 +2155,63 @@ body.dark .spotlight::after {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================================
+   ✨ PREMIUM FX — ROUND 4
+   ============================================================ */
+
+/* --- Smooth anchor landing --- */
+section[id] {
+    scroll-margin-top: 24px;
+}
+
+/* --- Skill header icons --- */
+.skill-header i {
+    width: 20px;
+    text-align: center;
+    margin-right: 6px;
+    color: var(--primary);
+    font-size: 14px;
+}
+
+/* --- Floating-label form fields --- */
+.float-group {
+    position: relative;
+}
+
+.float-group input,
+.float-group textarea {
+    margin-bottom: 18px;
+}
+
+.float-group label {
+    position: absolute;
+    left: 14px;
+    top: 13px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    pointer-events: none;
+    transition: top 0.22s ease, left 0.22s ease,
+                font-size 0.22s ease, color 0.22s ease,
+                background 0.22s ease;
+}
+
+.float-group input:focus + label,
+.float-group input:not(:placeholder-shown) + label,
+.float-group textarea:focus + label,
+.float-group textarea:not(:placeholder-shown) + label {
+    top: -9px;
+    left: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--surface);
+    padding: 0 7px;
+    border-radius: 5px;
+}
+
+.send-btn i {
+    font-size: 13px;
+}

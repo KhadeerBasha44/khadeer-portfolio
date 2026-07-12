@@ -285,7 +285,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Python</span>
+                <span><i class="fab fa-python"></i> Python</span>
                 <span>80%</span>
             </div>
             <div class="skill-bar">
@@ -295,7 +295,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>SQL / MySQL</span>
+                <span><i class="fas fa-database"></i> SQL / MySQL</span>
                 <span>75%</span>
             </div>
             <div class="skill-bar">
@@ -305,7 +305,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Data Analysis (Pandas, NumPy)</span>
+                <span><i class="fas fa-table"></i> Data Analysis (Pandas, NumPy)</span>
                 <span>80%</span>
             </div>
             <div class="skill-bar">
@@ -315,7 +315,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Data Visualization (Power BI, Excel)</span>
+                <span><i class="fas fa-chart-column"></i> Data Visualization (Power BI, Excel)</span>
                 <span>80%</span>
             </div>
             <div class="skill-bar">
@@ -325,7 +325,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Machine Learning</span>
+                <span><i class="fas fa-brain"></i> Machine Learning</span>
                 <span>70%</span>
             </div>
             <div class="skill-bar">
@@ -335,7 +335,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Statistical Analysis</span>
+                <span><i class="fas fa-square-root-variable"></i> Statistical Analysis</span>
                 <span>75%</span>
             </div>
             <div class="skill-bar">
@@ -345,7 +345,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Time Series Analysis</span>
+                <span><i class="fas fa-chart-line"></i> Time Series Analysis</span>
                 <span>70%</span>
             </div>
             <div class="skill-bar">
@@ -355,7 +355,7 @@ with hands-on experience in real-world data analysis projects.
 
         <div class="skill-item">
             <div class="skill-header">
-                <span>Hypothesis Testing</span>
+                <span><i class="fas fa-flask"></i> Hypothesis Testing</span>
                 <span>70%</span>
             </div>
             <div class="skill-bar">
@@ -391,7 +391,7 @@ with hands-on experience in real-world data analysis projects.
             </div>
 
             <div class="project-tags">
-                <span>Python</span>
+                <span><i class="fab fa-python"></i> Python</span>
                 <span>Scikit-learn</span>
                 <span>Random Forest</span>
                 <span>SVM</span>
@@ -441,7 +441,7 @@ with hands-on experience in real-world data analysis projects.
             </div>
 
             <div class="project-tags">
-                <span>Python</span>
+                <span><i class="fab fa-python"></i> Python</span>
                 <span>Pandas</span>
                 <span>Linear Regression</span>
                 <span>Random Forest</span>
@@ -491,7 +491,7 @@ with hands-on experience in real-world data analysis projects.
             </div>
 
             <div class="project-tags">
-                <span>Python</span>
+                <span><i class="fab fa-python"></i> Python</span>
                 <span>SARIMA</span>
                 <span>Statsmodels</span>
                 <span>Time Series</span>
@@ -670,22 +670,28 @@ with hands-on experience in real-world data analysis projects.
     <form id="contactForm">
 
         <div class="form-row">
-            <div class="form-group">
-                <label>Your Name <span class="required">*</span></label>
-                <input type="text" name="name" required>
+            <div class="form-group float-group">
+                <input type="text" name="name" id="cf-name" placeholder=" " required>
+                <label for="cf-name">Your Name <span class="required">*</span></label>
             </div>
 
-            <div class="form-group">
-                <label>Your Email <span class="required">*</span></label>
-                <input type="email" name="email" required>
+            <div class="form-group float-group">
+                <input type="email" name="email" id="cf-email" placeholder=" " required>
+                <label for="cf-email">Your Email <span class="required">*</span></label>
             </div>
         </div>
 
-        <input type="text" name="subject" placeholder="Subject" required>
+        <div class="float-group">
+            <input type="text" name="subject" id="cf-subject" placeholder=" " required>
+            <label for="cf-subject">Subject <span class="required">*</span></label>
+        </div>
 
-        <textarea name="message" rows="6" placeholder="Message" required></textarea>
+        <div class="float-group">
+            <textarea name="message" id="cf-message" rows="6" placeholder=" " required></textarea>
+            <label for="cf-message">Message <span class="required">*</span></label>
+        </div>
 
-        <button type="submit" class="send-btn">Send Message</button>
+        <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
 
     </form>
 
